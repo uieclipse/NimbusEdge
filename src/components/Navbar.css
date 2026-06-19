@@ -1,0 +1,128 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(11, 17, 32, 0.82);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  gap: 24px;
+}
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.12rem;
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+}
+
+.navbar__brand-mark {
+  display: flex;
+}
+
+.navbar__links {
+  display: flex;
+  gap: 28px;
+  flex: 1;
+  justify-content: center;
+}
+
+.navbar__link {
+  font-size: 0.92rem;
+  color: var(--text-dim);
+  transition: color 0.15s ease;
+}
+
+.navbar__link:hover { color: var(--text); }
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.navbar__user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+  padding: 6px 10px 6px 6px;
+  border-radius: 999px;
+  transition: background 0.15s ease;
+}
+
+.navbar__user:hover { background: var(--ink-raised); }
+
+.navbar__avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+/* Shared buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.btn--primary {
+  background: var(--cyan);
+  color: #06131F;
+}
+.btn--primary:hover { background: #6BDBFF; transform: translateY(-1px); }
+
+.btn--ghost {
+  color: var(--text-dim);
+}
+.btn--ghost:hover { color: var(--text); }
+
+.btn--outline {
+  border-color: var(--line);
+  color: var(--text);
+  background: transparent;
+}
+.btn--outline:hover { border-color: var(--text-faint); background: var(--ink-raised); }
+
+.btn--block { width: 100%; }
+
+.btn--danger {
+  background: rgba(251, 113, 133, 0.12);
+  color: var(--red);
+}
+.btn--danger:hover { background: rgba(251, 113, 133, 0.2); }
+
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+
+@media (max-width: 880px) {
+  .navbar__links { display: none; }
+}
