@@ -156,10 +156,10 @@ export default function Landing() {
           <div className="hero__copy">
             <span className="eyebrow">Open to new opportunities</span>
             <h1 className="hero__title">
-              Building fast, accessible interfaces that scale with the product.
+              I'm Sanjay, a Frontend Developer specializing in scalable, accessible user interfaces — from component architecture to performance tuning.
             </h1>
             <p className="hero__sub">
-              I'm Sanjay, a Frontend Developer specializing in scalable, accessible user interfaces — from component architecture to performance tuning.
+              Building fast, accessible interfaces that scale with the product.
             </p>
             <div className="hero__actions">
               <a href="#projects" className="btn btn--primary btn--lg">View Projects</a>
