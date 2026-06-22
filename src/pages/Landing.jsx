@@ -1,82 +1,169 @@
 // src/pages/Landing.jsx
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { api } from "../lib/api";
 import StatusConsole from "../components/StatusConsole";
-import PlanCard from "../components/PlanCard";
 import "./Landing.css";
+import './About.css';
+import TechIcon from './TechIcon.jsx';
+import './Experience.css';
 
-const FEATURES = [
+const GROUPS = [
   {
-    title: "NVMe storage, every tier",
-    body: "No spinning disks anywhere in the stack. Pages load off solid-state storage from the smallest plan up.",
-    icon: "storage",
+    label: 'Core',
+    items: [
+      { name: 'JavaScript', icon: 'javascript', level: 90 },
+      { name: 'React.js', icon: 'react', level: 88 },
+      { name: 'HTML5', icon: 'html5', level: 95 },
+      { name: 'CSS3', icon: 'css3', level: 92 },
+    ],
   },
   {
-    title: "One-click staging",
-    body: "Clone any site to a staging environment, test changes, then push to production without downtime.",
-    icon: "branch",
+    label: 'Frontend Tooling',
+    items: [
+      { name: 'TypeScript', icon: 'typescript', level: 70 },
+      { name: 'Redux', icon: 'redux', level: 75 },
+      { name: 'Tailwind CSS', icon: 'tailwindcss', level: 85 },
+      { name: 'Sass', icon: 'sass', level: 80 },
+      { name: 'Vite', icon: 'vite', level: 82 },
+    ],
   },
   {
-    title: "Automatic backups",
-    body: "Every plan backs up on a schedule. Restore a full snapshot or a single file in a couple of clicks.",
-    icon: "shield",
-  },
-  {
-    title: "Real humans, fast",
-    body: "Support replies come from engineers who run the platform, not a script. Median first reply under 8 minutes.",
-    icon: "chat",
+    label: 'Workflow',
+    items: [
+      { name: 'Git', icon: 'git', level: 88 },
+      { name: 'GitHub', icon: 'github', level: 88 },
+      { name: 'Webpack', icon: 'webpack', level: 65 },
+      { name: 'Jest', icon: 'jest', level: 70 },
+      { name: 'Figma', icon: 'figma', level: 72 },
+    ],
   },
 ];
 
-const REGIONS = [
-  { code: "FRA", name: "Frankfurt, DE" },
-  { code: "IAD", name: "Virginia, US" },
-  { code: "SIN", name: "Singapore" },
-  { code: "BOM", name: "Mumbai, IN" },
+const PROJECTS = [
+  {
+    name: 'Project One',
+    status: 'live',
+    description: 'Replace this with a short description of what the project does and the problem it solves.',
+    metrics: [
+      { label: 'Lighthouse score', value: '98' },
+      { label: 'Load time', value: '0.8s' },
+    ],
+    achievements: [
+      'Replace with a real achievement, e.g. cut bundle size by 40% via code-splitting.',
+      'Replace with a second achievement — accessibility audit, test coverage, etc.',
+    ],
+    stack: [
+      { name: 'React', icon: 'react' },
+      { name: 'JavaScript', icon: 'javascript' },
+      { name: 'CSS3', icon: 'css3' },
+    ],
+    github: 'https://github.com/your-username/project-one',
+    demo: 'https://project-one-demo.netlify.app',
+  },
+  {
+    name: 'Project Two',
+    status: 'live',
+    description: 'Replace this with a short description of what the project does and the problem it solves.',
+    metrics: [
+      { label: 'Users', value: '500+' },
+      { label: 'Uptime', value: '99.9%' },
+    ],
+    achievements: [
+      'Replace with a real achievement specific to this project.',
+      'Replace with a second achievement, ideally with a number attached.',
+    ],
+    stack: [
+      { name: 'React', icon: 'react' },
+      { name: 'Redux', icon: 'redux' },
+      { name: 'TypeScript', icon: 'typescript' },
+    ],
+    github: 'https://github.com/your-username/project-two',
+    demo: 'https://project-two-demo.netlify.app',
+  },
+  {
+    name: 'Project Three',
+    status: 'building',
+    description: 'Replace this with a short description of what the project does and the problem it solves.',
+    metrics: [
+      { label: 'Components', value: '24' },
+      { label: 'Test coverage', value: '85%' },
+    ],
+    achievements: [
+      'Replace with a real achievement specific to this project.',
+    ],
+    stack: [
+      { name: 'React', icon: 'react' },
+      { name: 'Tailwind', icon: 'tailwindcss' },
+      { name: 'Vite', icon: 'vite' },
+    ],
+    github: 'https://github.com/your-username/project-three',
+    demo: null,
+  },
+];
+
+const FACTS = [
+  { label: 'Role', value: 'Mid-Level Frontend Developer' },
+  { label: 'Focus', value: 'React, JavaScript, UI/UX' },
+  { label: 'Stands for', value: 'Responsive & accessible apps' },
+];
+
+const TIMELINE = [
+  {
+    role: 'Frontend Developer',
+    company: 'Company Name',
+    period: 'Jan 2024 — Present',
+    points: [
+      'Replace with what you actually did — e.g. built and maintained X feature used by Y users.',
+      'Replace with a second concrete contribution, ideally with a number attached.',
+      'Replace with a third point — tools you introduced, performance you improved, etc.',
+    ],
+  },
 ];
 
 export default function Landing() {
-  const [plans, setPlans] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
   const { user } = useAuth();
   const navigate = useNavigate();
+  const landingRef = useRef(null);
+
 
   useEffect(() => {
-    api
-      .getPlans()
-      .then(({ plans }) => setPlans(plans))
-      .catch(() => setError("Couldn't load plans right now."))
-      .finally(() => setLoading(false));
+    const root = landingRef.current;
+    if (!root) return;
+    const els = root.querySelectorAll("[data-anim]");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
-  function handleSelectPlan(plan) {
-    if (!user) {
-      navigate("/register", { state: { planId: plan.id } });
-    } else {
-      navigate("/profile", { state: { selectPlanId: plan.id } });
-    }
-  }
+
 
   return (
-    <div className="landing">
-      {/* Hero */}
+    <div className="landing" ref={landingRef}>
+      {/* Hero — animates via CSS immediately on mount */}
       <section className="hero">
         <div className="container hero__grid">
           <div className="hero__copy">
-            <span className="eyebrow">Managed cloud hosting</span>
+            <span className="eyebrow">Open to new opportunities</span>
             <h1 className="hero__title">
-              Servers that<br />stay out of<br />your way.
+              Building fast, accessible interfaces that scale with the product.
             </h1>
             <p className="hero__sub">
-              NimbusEdge runs your sites on NVMe storage across four regions, with backups,
-              staging, and support that don't make you wait. Deploy in minutes, not tickets.
+              I'm Sanjay, a Frontend Developer specializing in scalable, accessible user interfaces — from component architecture to performance tuning.
             </p>
             <div className="hero__actions">
-              <a href="#plans" className="btn btn--primary btn--lg">See plans</a>
-              <a href="#status" className="btn btn--outline btn--lg">Check network status</a>
+              <a href="#projects" className="btn btn--primary btn--lg">View Projects</a>
+              <a href="#about" className="btn btn--outline btn--lg">Contact Me</a>
             </div>
           </div>
           <div className="hero__visual">
@@ -85,80 +172,185 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Regions strip */}
-      <section className="regions" id="status">
-        <div className="container regions__inner">
-          <span className="regions__label">Live in four regions</span>
-          <div className="regions__list">
-            {REGIONS.map((r) => (
-              <div className="regions__item" key={r.code}>
-                <span className="regions__dot" />
-                {r.name}
-                <span className="regions__code">{r.code}</span>
+      {/* About */}
+      <section className="regions" id="about">
+        <div className="section about">
+          <div className="container">
+            <h2 className="section-title" data-anim="fade-up">A bit about how I work</h2>
+            <div className="about__grid">
+              <div className="about__text" data-anim="fade-up" data-delay="100">
+                <p>
+                  I'm Sanjay, a mid-level frontend developer who builds interfaces that
+                  feel quick, look deliberate, and work for everyone using them — not
+                  just the people testing on a fast laptop with a mouse.
+                </p>
+                <p>
+                  My day-to-day lives in React and JavaScript, but the part I care
+                  about most is what happens after the components render: is it fast
+                  on a slow connection, can it be operated with a keyboard, does it
+                  hold up at 320px wide. Accessibility and responsiveness aren't a
+                  checklist for me, they're part of what "done" means.
+                </p>
+                <p>
+                  I like clear interfaces, clean component structure, and shipping
+                  things that hold up under real use.
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="features" id="features">
-        <div className="container">
-          <h2 className="section-title">Built for people who'd rather not think about hosting</h2>
-          <p className="section-sub">The fundamentals, handled, so the rest of your time goes to the actual product.</p>
-
-          <div className="features__grid">
-            {FEATURES.map((f) => (
-              <div className="feature-card" key={f.title}>
-                <FeatureIcon name={f.icon} />
-                <h3>{f.title}</h3>
-                <p>{f.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Plans */}
-      <section className="plans" id="plans">
-        <div className="container">
-          <h2 className="section-title">Plans that grow with the project</h2>
-          <p className="section-sub">Switch tiers anytime. No setup fees, no contracts.</p>
-
-          {loading && <p className="plans__status">Loading plans…</p>}
-          {error && <p className="plans__status plans__status--error">{error}</p>}
-
-          {!loading && !error && (
-            <div className="plans__grid">
-              {plans.map((plan) => (
-                <PlanCard key={plan.id} plan={plan} onSelect={handleSelectPlan} />
-              ))}
+              <dl className="about__facts" data-anim="fade-up" data-delay="200">
+                {FACTS.map((f) => (
+                  <div key={f.label} className="about__fact">
+                    <dt>{f.label}</dt>
+                    <dd>{f.value}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
-          )}
+          </div>
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section className="features" id="skills">
+        <div className="container">
+          <h2 className="section-title" data-anim="fade-up">what i reach for</h2>
+          <div className="skills__groups">
+            {GROUPS.map((group, gi) => (
+              <div
+                key={group.label}
+                className="skills__group"
+                data-anim="fade-up"
+                data-delay={String((gi + 1) * 100)}
+              >
+                <h3 className="skills__group-label">{group.label}</h3>
+                <ul className="skills__list">
+                  {group.items.map((item, ii) => (
+                    <li
+                      key={item.name}
+                      className="skills__item"
+                      data-anim="fade-up"
+                      data-delay={String((ii + 1) * 80)}
+                    >
+                      <div className="skills__item-top">
+                        <span className="skills__item-icon">
+                          <TechIcon name={item.icon} />
+                        </span>
+                        <span className="skills__item-name">{item.name}</span>
+                        <span className="skills__item-level">{item.level}%</span>
+                      </div>
+                      <div
+                        className="skills__bar-track"
+                        role="progressbar"
+                        aria-label={`${item.name} proficiency`}
+                        aria-valuenow={item.level}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                      >
+                        <span
+                          className="skills__bar-fill"
+                          style={{ '--level': `${item.level}%`, animationDelay: `${ii * 80}ms` }}
+                        />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Experience */}
+      <section className="features" id="experience">
+        <div className="container">
+          <h2 className="section-title" data-anim="fade-up">Where I've worked</h2>
+          <ol className="timeline">
+            {TIMELINE.map((job, i) => (
+              <li
+                key={`${job.company}-${job.period}`}
+                className="timeline__item"
+                data-anim="slide-right"
+                data-delay={String(i * 100)}
+              >
+                <div className="timeline__marker" aria-hidden="true" />
+                <div className="timeline__content">
+                  <p className="timeline__period">{job.period}</p>
+                  <h3 className="timeline__role">{job.role}</h3>
+                  <p className="timeline__company">{job.company}</p>
+                  <ul className="timeline__points">
+                    {job.points.map((point, j) => (
+                      <li key={j}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section className="features" id="projects">
+        <div className="container">
+          <h2 className="section-title" data-anim="fade-up">Things I've built</h2>
+          <div className="projects__grid">
+            {PROJECTS.map((project, i) => (
+              <article
+                key={project.name}
+                className="project-card"
+                data-anim="fade-up"
+                data-delay={String(i * 150)}
+              >
+                <div className="project-card__top">
+                  <h3>{project.name}</h3>
+                  <span className={`project-card__status project-card__status--${project.status}`}>
+                    {project.status === 'live' ? 'Live' : 'Building'}
+                  </span>
+                </div>
+                <p className="project-card__desc">{project.description}</p>
+                <div className="project-card__metrics">
+                  {project.metrics.map((m) => (
+                    <div key={m.label} className="project-card__metric">
+                      <span className="project-card__metric-value">{m.value}</span>
+                      <span className="project-card__metric-label">{m.label}</span>
+                    </div>
+                  ))}
+                </div>
+                <ul className="project-card__achievements">
+                  {project.achievements.map((a, j) => (
+                    <li key={j}>{a}</li>
+                  ))}
+                </ul>
+                <ul className="project-card__stack">
+                  {project.stack.map((tech) => (
+                    <li key={tech.name} title={tech.name}>
+                      <TechIcon name={tech.icon} />
+                    </li>
+                  ))}
+                </ul>
+                <div className="project-card__links">
+                  <a href={project.github} target="_blank" rel="noreferrer" className="project-card__link">
+                    GitHub →
+                  </a>
+                  {project.demo && (
+                    <a href={project.demo} target="_blank" rel="noreferrer" className="project-card__link">
+                      Live demo →
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* CTA */}
       <section className="cta">
-        <div className="container cta__inner">
-          <h2>Your site could be live in the next five minutes.</h2>
-          <a href="#plans" className="btn btn--primary btn--lg">Start now — no card required</a>
+        <div className="container cta__inner w-100" data-anim="fade-up">
+          <h2 className="section-title">got an idea? let's build it.</h2>
+          <h2 className="section-sub">i'm currently open to freelance projects and full-time roles. fastest way to reach me is email — i actually check it.</h2>
+          <a href="#contact" className="btn btn--primary btn--lg">Contact Me</a>
         </div>
       </section>
     </div>
-  );
-}
-
-function FeatureIcon({ name }) {
-  const paths = {
-    storage: <path d="M4 7c0-1.1 3.58-2 8-2s8 .9 8 2-3.58 2-8 2-8-.9-8-2Zm0 0v10c0 1.1 3.58 2 8 2s8-.9 8-2V7M4 12c0 1.1 3.58 2 8 2s8-.9 8-2" />,
-    branch: <path d="M6 3v8a4 4 0 0 0 4 4h4M6 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 14a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm0-8a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />,
-    shield: <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z" />,
-    chat: <path d="M21 12a8.96 8.96 0 0 1-2.34 6.06L21 21l-3.2-1.07A9 9 0 1 1 21 12Z" />,
-  };
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="feature-card__icon">
-      {paths[name]}
-    </svg>
   );
 }
