@@ -4,7 +4,7 @@ import "./Footer.css";
 const CONTACTS = [
   { label: 'Email', value: 'sanjay@example.com', href: 'mailto:sanjay@example.com' },
   { label: 'GitHub', value: 'github.com/your-username', href: 'https://github.com/your-username' },
-  { label: 'LinkedIn', value: 'linkedin.com/in/your-username', href: 'https://linkedin.com/in/your-username' },
+  { label: 'LinkedIn', value: 'linkedin.com/in/sanjay-nandi-28abb9160', href: 'https://www.linkedin.com/in/sanjay-nandi-28abb9160/' },
 ];
 export default function Footer() {
   return (
@@ -13,7 +13,7 @@ export default function Footer() {
         <h2 className="footer__title">let's build something together.</h2>
           <div className="contact__grid">
           <p className="contact__intro">
-            Open to frontend roles and freelance projects. The fastest way to
+            Open to frontend leadership roles and freelance projects. The fastest way to
             reach me is email — I read everything that lands there.
           </p>
 
@@ -30,7 +30,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="container footer__bottom">
-        <span>© 2026 Sanjay. Built with React.
+        <span>© 2026 Sanjay Nandi. Built with React.
 </span>
       </div>
     </footer>

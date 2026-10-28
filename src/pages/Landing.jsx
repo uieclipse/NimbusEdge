@@ -10,115 +10,142 @@ import './Experience.css';
 
 const GROUPS = [
   {
-    label: 'Core',
+    label: 'Web',
     items: [
-      { name: 'JavaScript', icon: 'javascript', level: 90 },
-      { name: 'React.js', icon: 'react', level: 88 },
+      { name: 'React.js', icon: 'react', level: 92 },
+      { name: 'JavaScript (ES6+)', icon: 'javascript', level: 92 },
+      { name: 'TypeScript', icon: 'typescript', level: 82 },
+      { name: 'Next.js', icon: 'react', level: 80 },
+      { name: 'Redux Toolkit', icon: 'redux', level: 85 },
       { name: 'HTML5', icon: 'html5', level: 95 },
       { name: 'CSS3', icon: 'css3', level: 92 },
-    ],
-  },
-  {
-    label: 'Frontend Tooling',
-    items: [
-      { name: 'TypeScript', icon: 'typescript', level: 70 },
-      { name: 'Redux', icon: 'redux', level: 75 },
+      { name: 'Sass', icon: 'sass', level: 88 },
       { name: 'Tailwind CSS', icon: 'tailwindcss', level: 85 },
-      { name: 'Sass', icon: 'sass', level: 80 },
-      { name: 'Vite', icon: 'vite', level: 82 },
     ],
   },
   {
-    label: 'Workflow',
+    label: 'Mobile',
     items: [
-      { name: 'Git', icon: 'git', level: 88 },
-      { name: 'GitHub', icon: 'github', level: 88 },
-      { name: 'Webpack', icon: 'webpack', level: 65 },
-      { name: 'Jest', icon: 'jest', level: 70 },
-      { name: 'Figma', icon: 'figma', level: 72 },
+      { name: 'Flutter', icon: 'flutter', level: 82 },
+      { name: 'Dart', icon: 'dart', level: 80 },
+      { name: 'Bloc / Riverpod / Provider', icon: 'flutter', level: 75 },
+      { name: 'Firebase', icon: 'firebase', level: 72 },
+    ],
+  },
+  {
+    label: 'APIs & Tools',
+    items: [
+      { name: 'REST APIs', icon: 'api', level: 90 },
+      { name: 'Git', icon: 'git', level: 90 },
+      { name: 'Jest', icon: 'jest', level: 72 },
+      { name: 'Vite', icon: 'vite', level: 85 },
+      { name: 'Webpack', icon: 'webpack', level: 72 },
     ],
   },
 ];
 
 const PROJECTS = [
   {
-    name: 'Project One',
+    name: 'Investment Advisory Platform',
     status: 'live',
-    description: 'Replace this with a short description of what the project does and the problem it solves.',
+    description: 'A wealth-tech platform for advisors and investors on web (React) and mobile (Flutter): portfolio dashboards, fund discovery, model portfolios and risk profiling.',
     metrics: [
-      { label: 'Lighthouse score', value: '98' },
-      { label: 'Load time', value: '0.8s' },
+      { label: 'Platforms', value: 'Web + Mobile' },
+      { label: 'Role', value: 'Frontend lead' },
     ],
     achievements: [
-      'Replace with a real achievement, e.g. cut bundle size by 40% via code-splitting.',
-      'Replace with a second achievement — accessibility audit, test coverage, etc.',
+      'Built onboarding and KYC journeys that reduced investor drop-offs.',
+      'Improved web performance through code-splitting, lazy loading and API optimisation.',
+    ],
+    stack: [
+      { name: 'React', icon: 'react' },
+      { name: 'TypeScript', icon: 'typescript' },
+      { name: 'Redux', icon: 'redux' },
+      { name: 'Sass', icon: 'sass' },
+    ],
+    github: null,
+    demo: null,
+  },
+  {
+    name: 'Learning Management System',
+    status: 'live',
+    description: 'An LMS built in React with courses, assessments, progress tracking and role-based screens.',
+    metrics: [
+      { label: 'Platform', value: 'Web' },
+      { label: 'Role', value: 'Frontend lead' },
+    ],
+    achievements: [
+      'Built course, assessment and progress-tracking flows.',
+      'Delivered role-based screens for different user types.',
     ],
     stack: [
       { name: 'React', icon: 'react' },
       { name: 'JavaScript', icon: 'javascript' },
-      { name: 'CSS3', icon: 'css3' },
-    ],
-    github: 'https://github.com/your-username/project-one',
-    demo: 'https://project-one-demo.netlify.app',
-  },
-  {
-    name: 'Project Two',
-    status: 'live',
-    description: 'Replace this with a short description of what the project does and the problem it solves.',
-    metrics: [
-      { label: 'Users', value: '500+' },
-      { label: 'Uptime', value: '99.9%' },
-    ],
-    achievements: [
-      'Replace with a real achievement specific to this project.',
-      'Replace with a second achievement, ideally with a number attached.',
-    ],
-    stack: [
-      { name: 'React', icon: 'react' },
       { name: 'Redux', icon: 'redux' },
-      { name: 'TypeScript', icon: 'typescript' },
     ],
-    github: 'https://github.com/your-username/project-two',
-    demo: 'https://project-two-demo.netlify.app',
+    github: null,
+    demo: null,
   },
   {
-    name: 'Project Three',
-    status: 'building',
-    description: 'Replace this with a short description of what the project does and the problem it solves.',
+    name: 'Shared Component Library',
+    status: 'live',
+    description: 'A reusable React component library in TypeScript and Sass, shared across products to speed up feature delivery.',
     metrics: [
-      { label: 'Components', value: '24' },
-      { label: 'Test coverage', value: '85%' },
+      { label: 'Built with', value: 'TS + Sass' },
+      { label: 'Used in', value: 'IAP & LMS' },
     ],
     achievements: [
-      'Replace with a real achievement specific to this project.',
+      'Gave product teams one consistent set of UI building blocks.',
     ],
     stack: [
       { name: 'React', icon: 'react' },
-      { name: 'Tailwind', icon: 'tailwindcss' },
-      { name: 'Vite', icon: 'vite' },
+      { name: 'TypeScript', icon: 'typescript' },
+      { name: 'Sass', icon: 'sass' },
     ],
-    github: 'https://github.com/your-username/project-three',
+    github: null,
     demo: null,
   },
 ];
 
 const FACTS = [
-  { label: 'Role', value: 'Mid-Level Frontend Developer' },
-  { label: 'Focus', value: 'React, JavaScript, UI/UX' },
-  { label: 'Stands for', value: 'Responsive & accessible apps' },
+  { label: 'Role', value: 'Frontend Tech Lead' },
+  { label: 'Experience', value: '8+ years' },
+  { label: 'Focus', value: 'React.js, Next.js & Flutter' },
+  { label: 'Domain', value: 'Wealth-tech & Fintech' },
+  { label: 'Based in', value: 'Kolkata, India' },
 ];
 
 const TIMELINE = [
   {
-    role: 'Frontend Developer',
-    company: 'Company Name',
-    period: 'Jan 2024 — Present',
+    role: 'Frontend Tech Lead',
+    company: 'Finlabs India Pvt Ltd · Kolkata',
+    period: '2021 — Present',
     points: [
-      'Replace with what you actually did — e.g. built and maintained X feature used by Y users.',
-      'Replace with a second concrete contribution, ideally with a number attached.',
-      'Replace with a third point — tools you introduced, performance you improved, etc.',
+      'Lead frontend for the Investment Advisory Platform on web (React) and mobile (Flutter): portfolio dashboards, fund discovery, model portfolios and risk profiling.',
+      'Built onboarding and KYC journeys that reduced drop-offs.',
+      'Built the LMS in React with courses, assessments, progress tracking and role-based screens.',
+      'Created a shared React component library (TypeScript + Sass) that sped up feature delivery.',
+      'Improved web performance through code-splitting, lazy loading and API optimisation.',
+      'Mentor developers; own code reviews, Git standards and API contracts with backend teams.',
     ],
   },
+  {
+    role: 'Frontend Developer',
+    company: 'Earlier roles',
+    period: '2016 — 2021',
+    points: [
+      'Built responsive web applications with React.js, JavaScript and Redux.',
+      'Created reusable components with HTML5, CSS3 and Sass and integrated REST APIs.',
+      'Developed cross-browser user interfaces with JavaScript, jQuery, HTML5 and CSS3 in Agile teams.',
+    ],
+  },
+];
+
+const CERTIFICATIONS = [
+  { name: 'Generative AI Foundations', issuer: 'upGrad', year: '2025' },
+  { name: 'JavaScript: The Complete Guide (Beginner + Advanced)', issuer: 'Udemy', year: '2022' },
+  { name: 'The Complete Sass & SCSS Course', issuer: 'Udemy', year: '2021' },
+  { name: 'TypeScript', issuer: 'Udemy', year: '2021' },
 ];
 
 export default function Landing() {
@@ -156,12 +183,12 @@ export default function Landing() {
           <div className="hero__copy">
             <span className="eyebrow">Open to new opportunities</span>
             <h1 className="hero__title">
-              I'm Sanjay, 
+              I'm Sanjay Nandi,
             </h1>
             <p className="hero__sub">
-              a Frontend Developer specializing in scalable, accessible user interfaces — from component architecture to performance tuning.
+              a Frontend Tech Lead building fast, secure web and mobile apps with React.js and Flutter.
               <br/>
-              Building fast, accessible interfaces that scale with the product.
+              8+ years shipping wealth-tech and fintech products — from portfolio dashboards to KYC onboarding.
             </p>
             <div className="hero__actions">
               <a href="#projects" className="btn btn--primary btn--lg">View Projects</a>
@@ -182,20 +209,20 @@ export default function Landing() {
             <div className="about__grid">
               <div className="about__text" data-anim="fade-up" data-delay="100">
                 <p>
-                  I'm Sanjay, a mid-level frontend developer who builds interfaces that
-                  feel quick, look deliberate, and work for everyone using them — not
-                  just the people testing on a fast laptop with a mouse.
+                  I'm Sanjay, a Frontend Tech Lead with 8+ years of experience building
+                  fast, secure web and mobile apps with React.js and Flutter.
                 </p>
                 <p>
-                  My day-to-day lives in React and JavaScript, but the part I care
-                  about most is what happens after the components render: is it fast
-                  on a slow connection, can it be operated with a keyboard, does it
-                  hold up at 320px wide. Accessibility and responsiveness aren't a
-                  checklist for me, they're part of what "done" means.
+                  At Finlabs India I lead frontend for an Investment Advisory Platform
+                  and a Learning Management System, working day to day in JavaScript,
+                  TypeScript, Next.js and Redux. I know the wealth-tech domain well —
+                  mutual funds, SIPs, portfolio and NAV reporting, KYC onboarding and
+                  risk profiling.
                 </p>
                 <p>
-                  I like clear interfaces, clean component structure, and shipping
-                  things that hold up under real use.
+                  I also mentor developers, run code reviews, and keep API contracts
+                  with backend teams clean, so the whole team ships things that hold
+                  up under real use.
                 </p>
               </div>
               <dl className="about__facts" data-anim="fade-up" data-delay="200">
@@ -287,6 +314,13 @@ export default function Landing() {
               </li>
             ))}
           </ol>
+
+          <h3 className="skills__group-label" data-anim="fade-up">Certifications</h3>
+          <ul className="timeline__points" data-anim="fade-up">
+            {CERTIFICATIONS.map((c) => (
+              <li key={c.name}>{c.name} · {c.issuer} · {c.year}</li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -330,9 +364,11 @@ export default function Landing() {
                   ))}
                 </ul>
                 <div className="project-card__links">
-                  <a href={project.github} target="_blank" rel="noreferrer" className="project-card__link">
-                    GitHub →
-                  </a>
+                  {project.github && (
+                    <a href={project.github} target="_blank" rel="noreferrer" className="project-card__link">
+                      GitHub →
+                    </a>
+                  )}
                   {project.demo && (
                     <a href={project.demo} target="_blank" rel="noreferrer" className="project-card__link">
                       Live demo →
